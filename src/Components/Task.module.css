@@ -1,0 +1,24 @@
+.container {
+  width: 100%;
+  display: flex;
+  margin-top: 24px;
+  background: var(--gray-500);
+  color: var(--gray-100);
+  padding: 1rem;
+  gap: 12px;
+  border-radius: 8px;
+}
+
+.check {
+  margin-left: 16px;
+  margin-righr: 12px;
+}
+
+.text {
+  flex: 1;
+}
+
+.action {
+  margin-left: 12px;
+  margin-righr: 16px;
+}
