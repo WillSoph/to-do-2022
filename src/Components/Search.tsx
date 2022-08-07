@@ -2,25 +2,27 @@ import { FormEvent, useState } from 'react'
 import { PlusCircle } from 'phosphor-react';
 import styles from './Search.module.css'
 
-interface ArrayProp{
-    id: string,
-    title: string,
-    isComplete: boolean
+interface InputProps  {
+    tasks: {
+        id: string;
+        title: string;
+        isComplete: boolean
+    }[];
+    onAdd: (taskToAdd: string) => void;    
 }
 
-interface InputProps extends Array<ArrayProp> {
-    id: string,
-    title: string,
-    isComplete: boolean
-    onAdd: () => void;    
-}
-
-export function Search({ onAdd, title }: InputProps) {
+export function Search({ onAdd, tasks }: InputProps) {
     const [focused, setFocused] = useState(false);
     const [newTask, setNewTask] = useState('');
 
+    function handleCreateNewTask(event: FormEvent) {
+        event.preventDefault()
+
+        onAdd(newTask)
+    }
+
     return (
-        <div className={styles.container} onSubmit={onAdd}>
+        <form className={styles.container} onSubmit={handleCreateNewTask}>
             <div className={styles.containerInput}
                 style={{
                     border: focused ? '2px solid#5e60ce' : 'none'               
@@ -43,9 +45,9 @@ export function Search({ onAdd, title }: InputProps) {
                 type="submit"
             >Criar
             <PlusCircle 
-                size={16}               
+                size={16}              
             />
             </button>    
-        </div>  
+        </form>  
     )
 }

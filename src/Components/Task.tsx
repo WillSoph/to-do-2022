@@ -1,16 +1,27 @@
 import styles from './Task.module.css'
 import { Trash, CheckCircle, Circle } from 'phosphor-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TaskProps {
     isComplete: boolean;
     title: string;
     id: string;
     onDelete: (id: string) => void;
+
+    onComplete: (isComplete: boolean) => void; 
 }
 
-export function Task({ isComplete, title, id, onDelete }: TaskProps) {
+export function Task({ isComplete, title, id, onDelete, onComplete }: TaskProps) {
     const [isChecked, setIsChecked] = useState(isComplete)
+
+    // useEffect(() => {
+    //     onComplete(isChecked)
+    // },[isChecked])
+
+    function checkar() {
+        setIsChecked(isChecked === true ? false : true)
+        onComplete(isChecked)
+    }
 
     function handleDeleteTask() {
         onDelete(id)
@@ -24,17 +35,17 @@ export function Task({ isComplete, title, id, onDelete }: TaskProps) {
                         size={24} 
                         weight="fill" 
                         color="#8284fa"
-                        onClick={() => setIsChecked(isChecked === true ? false : true)} 
+                        onClick={checkar} 
                     />
                     :
                     <Circle 
                         size={24} 
                         color="#4ea8de" 
-                        onClick={() => setIsChecked(!isChecked ? true : false)}
+                        onClick={checkar}
                     />
                 }
             </div>
-            <div className={styles.text}>
+            <div className={isChecked ? styles.textLined : styles.text}>
             {title}
             </div>
             <div className={styles.action}>

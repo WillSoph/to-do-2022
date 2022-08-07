@@ -31,6 +31,9 @@
   font-size: 0.875rem;
   font-weight: bold;
   cursor: pointer;
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
 
   transition: background 0.1s;
 }

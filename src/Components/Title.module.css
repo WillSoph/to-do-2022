@@ -33,4 +33,6 @@
   background: var(--gray-400);
   color: var(--gray-200);
   border-radius: 999px;
+  display: flex;
+  align-items: center;
 }
