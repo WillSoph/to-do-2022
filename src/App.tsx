@@ -27,13 +27,7 @@ export function App() {
     },
   ])
 
-  const [tasksCompleted, setTasksCompleted] = useState(tasks.filter(item => item.isComplete).length)
- 
-  useEffect(() => {
-    console.log("Mudou", tasksCompleted)
-    setTasksCompleted(tasks.filter(item => item.isComplete).length)
-  },[tasksCompleted])
-  
+  const tasksCompleted = tasks.filter(item => item.isComplete).length  
 
   function deleteTask(taskToDelete: string) {
     var newArray = tasks.filter((item) => item.id !== taskToDelete);
@@ -41,15 +35,17 @@ export function App() {
   }
 
   function completeTask(taskId: string) {
-    tasks.map(task => { 
+    const editedTasks = tasks.map(task => { 
       if(task.id === taskId) {
-        console.log("VAI CARAI")
         return {
           ...task, 
           isComplete: !task.isComplete
         } 
-    }})
-    setTasksCompleted(tasks.filter(item => item.isComplete).length)
+      } else {
+        return task
+      }
+    })
+    setTasks(editedTasks)
   }
 
   function addTasks(taskToAdd: string) {
