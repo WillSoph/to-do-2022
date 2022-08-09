@@ -7,16 +7,15 @@ interface TaskProps {
     title: string;
     id: string;
     onDelete: (id: string) => void;
-
-    onComplete: (isComplete: boolean) => void; 
+    onComplete: (id: string) => void; 
 }
 
 export function Task({ isComplete, title, id, onDelete, onComplete }: TaskProps) {
     const [isChecked, setIsChecked] = useState(isComplete)
     
     function checkar() {
-        setIsChecked(isChecked === true ? false : true)
-        onComplete(isChecked)
+        setIsChecked(!isChecked)
+        onComplete(id)
     }
 
     function handleDeleteTask() {

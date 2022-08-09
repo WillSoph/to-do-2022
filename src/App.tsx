@@ -31,6 +31,7 @@ export function App() {
  
   useEffect(() => {
     console.log("Mudou", tasksCompleted)
+    setTasksCompleted(tasks.filter(item => item.isComplete).length)
   },[tasksCompleted])
   
 
@@ -39,14 +40,16 @@ export function App() {
     setTasks(newArray)
   }
 
-  function completeTask(taskToAdd: boolean) {
-    var completos = tasks.map(task => { 
+  function completeTask(taskId: string) {
+    tasks.map(task => { 
+      if(task.id === taskId) {
+        console.log("VAI CARAI")
         return {
           ...task, 
-          isComplete: taskToAdd
+          isComplete: !task.isComplete
         } 
-    })
-    setTasks(completos)
+    }})
+    setTasksCompleted(tasks.filter(item => item.isComplete).length)
   }
 
   function addTasks(taskToAdd: string) {
@@ -68,7 +71,7 @@ export function App() {
         />
         <Title
           created={tasks.length}
-          tasksFinished={tasks.filter(item => item.isComplete).length}
+          tasksFinished={tasksCompleted}
         />
         {tasks.map(task => {
           return (
