@@ -40,8 +40,13 @@ export function App() {
   }
 
   function completeTask(taskToAdd: boolean) {
-    var newArray = tasks.filter(item => item.isComplete === taskToAdd).length;
-    setTasksCompleted(newArray)
+    var completos = tasks.map(task => { 
+        return {
+          ...task, 
+          isComplete: taskToAdd
+        } 
+    })
+    setTasks(completos)
   }
 
   function addTasks(taskToAdd: string) {
@@ -63,7 +68,7 @@ export function App() {
         />
         <Title
           created={tasks.length}
-          tasksFinished={tasksCompleted}
+          tasksFinished={tasks.filter(item => item.isComplete).length}
         />
         {tasks.map(task => {
           return (

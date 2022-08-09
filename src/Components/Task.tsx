@@ -13,11 +13,7 @@ interface TaskProps {
 
 export function Task({ isComplete, title, id, onDelete, onComplete }: TaskProps) {
     const [isChecked, setIsChecked] = useState(isComplete)
-
-    // useEffect(() => {
-    //     onComplete(isChecked)
-    // },[isChecked])
-
+    
     function checkar() {
         setIsChecked(isChecked === true ? false : true)
         onComplete(isChecked)
